@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+    />
+    <style>
+      body {
+        background-image: url(https://s3-alpha-sig.figma.com/img/bbd7/a28a/ae1bd00f715df353f19b61be60550035?Expires=1690156800&Signature=Sgz58BSdd0LWR7r4nT-COy4i58JgdTtCPUeICH~5Was1BuKXpWdPn1qOa4Pq8K3FIB8bZaiY65VgC38M-nPuvVURqNboQGheJ3ZTMGIpajwyhqOlw3M48nXtg3LDlsEnnAHrTRU1qvBB5rBNRS3Vwb~vw~vHXhSgqPsEsCUdSmS0H0yLoicET95FOKSZY6xi2ux4SlL631n34g09MJGvTZSAyGh5wfGOiDEx9~NC-eIwgRxv9ug4eaOX0wC4UchgL0Yv62gKxPtExWEEgvUN8buq~zEEQQ4GKIzMJnNPTSRpiJS4tnVC81J7KSAYfKqlfKj9r7UOCQ88eZYPJbxlSg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top;
+        font-family: var(--font-lato);
+      }
+      form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--gap-base);
+        text-align: center;
+        color: var(--color-white);
+      }
+
+      label {
+        font-size: var(--font-size-lg);
+      }
+      input[type="text"] {
+        border-radius: var(--br-3xs);
+        border: none;
+        padding: var(--padding-xs) var(--padding-base);
+        font-size: var(--font-size-base);
+      }
+      input[type="submit"] {
+        border-radius: var(--br-3xs);
+        border: none;
+        padding: var(--padding-xs) var(--padding-base);
+        font-size: var(--font-size-base);
+        cursor: pointer;
+        background-color: rgba(102, 96, 200, 0.6);
+        color: white;
+      }
+      input[type="submit"]:hover {
+        background-color: #6d67d0;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="GET" >
+      <label for="city">Digite a Cidade:</label>
+      <input type="text" id="city" name="city" required />
+      <input type="submit" value="Clima Agora" />
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const form = document.querySelector('form');
+      
+
+      form.addEventListener('submit', event => {
+  event.preventDefault();
+  const city = document.querySelector('#city').value;
+  
+
+  if (city === '') {
+    alert('Por favor, digite uma cidade.');
+    return;
+  }
+
+  axios.get(`/weather?city=${city}`)
+    .then(response => {
+      
+      const data = response.data;
+
+      if (!data.temperature) {
+        alert('Não foi possível encontrar informações do tempo para esta cidade.');
+        return;
+      }
+
+      // Armazene os dados do clima no armazenamento local para que possam ser acessados na página index.html
+      localStorage.setItem('weatherData', JSON.stringify(data));
+      
+
+      // Redirecione para a página index.html depois que os elementos da página forem atualizados
+      window.location.href = 'index.html';
+    })
+    .catch(error => {
+      console.log(error);
+    });
+});
+    </script>
+    
+
+  </body>
+</html>
+
+
