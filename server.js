@@ -7,7 +7,7 @@ const apiKey = process.env.API;
 const lang = 'pt_br';
 const units = 'metric';
 
-app.use(express.static('public'));
+app.use(express.static('public', { index: false }));
 
 app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message });
