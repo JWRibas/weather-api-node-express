@@ -309,11 +309,18 @@
     left: 16px;
   }
   .b14,
-  .div,
-  .div1 {
+  .sunrise
+  {
     position: absolute;
     top: 134px;
     left: 1px;
+  }
+  .b14,
+  .sunset
+  {
+    position: absolute;
+    top: 134px;
+    right: 1px;
   }
   .b14,
   .div1 {
@@ -321,7 +328,8 @@
   }
   .b14 {
     top: 70px;
-    left: 105px;
+    left: 50px;
+    right: 50px;
     font-size: var(--font-size-sm);
   }
   .chart,

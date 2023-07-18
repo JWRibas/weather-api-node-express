@@ -31,9 +31,13 @@ app.get('/weather', (req, res) => {
       const filteredData = {
         name: data.name,
         temperature: data.main.temp,
+        temperaturemin: data.main.temp_min,
+        temperaturemax: data.main.temp_max,
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
-        rain: data.rain ? data.rain['3h'] : 0
+        rain: data.rain ? data.rain['3h'] : 0,
+        sunrise: data.sys.sunrise,
+        sunset: data.sys.sunset
       };
       res.json(filteredData);
     })
