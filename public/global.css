@@ -1,9 +1,14 @@
 html, body {
-    height: 100%;
-    margin: 0;
-    line-height: normal;
-  }
-  
+  height: 100vh;
+  margin: 0;
+  line-height: normal;
+}
+
+@media (max-width: 768px) {
+html, body {
+  width: 100%;
+}
+}
   :root {
     /* fonts */
     --font-lato: Lato;
